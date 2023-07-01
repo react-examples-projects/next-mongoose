@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cogent-spring-386518",
+  "private_key_id": "b896180ca467287bcabe715ab15a5b64530dfc8b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC3M9Mn/gkqTVw7\nQ3RzCif4mkkIv5t+SV4VFWtzlin4FMp8QAZzxx7UsjtmNtnQzEtorRmwZj1Jgr0C\nWRNGsoKPFIw5SrwRcruBp/ItMGJ10mQzMWZKYs0KsUGNIuSxEf3sQLr+E3fl+U6m\nyVqH8xOg8upHFhV/X76613KIbQvZRbKI8Toz9C/dCcbjpw/dwI7Kq102WbmBwCid\nMBzGdOcXIFUr6g5hSo90s5+OX9FWuBINu6K6NE13BGEODPZl/K0gefOk4B5O2jB4\n5A+5oTVvMsTxo0k0fXo6w4NRBo+Xj6iuoQMLD8MfmqIRwvxJ+G2gB+HyqgDJuDUw\nwqyejHEXAgMBAAECggEANY3qzigO2dTff1uKsQ5o/N1tOCd69wHPhO5MCO/+uMyr\nHINC35l3w8mOX6TtK4JtEN55Qf3BMLoNMqCDaAlK7TSegSj9rUQS2CYWP2uDfNnR\n/L0WH+yd7+A9P1rR64lM50FM6HUceZfVjCAUXOWL+WLJZZppEmEUyl2s14C5E/wz\nQYklnKnIKSvHwGteeLEvgzzcxon7Zn3lbby7ocI59wCciM3DKwA3z9tN1XaCEwqq\ndZEWMyG9GCJDo76z0B0kpSN4ZBA4EDksy1iY1wQ0UbmHbRvx7XtUWI9aDjoOuHz0\nqnmiHFK9xqWNX3lOvyDU5y75xlf30NYse+P1LMg7sQKBgQDb0PrwKJt+okxJPJ+q\nR1fVy6SheC9RNVsBm0VKPe6EMDtauNvi4H8FygqJG8Rj3e8AqxNi+8hcm0ECBRQh\nivmXbnrmN9OY25kgrrXEmLe6v87k6v7m1F+T3+HP/XberaOShUakAMfpcFg2/QFt\nRwr6HFL+E+SpaFcjwSXKYmpqewKBgQDVW/ErXc0z7ef/iK5PYM2Unh2wqO+POwh/\nVsR0G1rNJQXNjxzef3C3BKfjogon8GWvD36kHtjDNrDM4A0fKszt84ZXYXEqmwgE\nQ6eYqc+XamNMah8XmzBzCZ1UUv+hRbNcROcSO5O/lRPqkq0BCq73q4dWcy3Oxwqs\nwvZs5tWPFQKBgBLOa1m2r68C5bHyXNqtpecluB0Ucj/pZ7LYfPIgIFLw6XMWk8Fy\nYYu2QHaAiKnep/8Po+X5EqhRpBsvIgzInhgFnMArkI/oYc55BBYg1r9Ef8f4Dvzi\nuJanNeOclNnyUydK/cM0SeY/9VwnA0M9K8RAPh18yDhyM9pcQQZyqxYXAoGBAIdg\n/3X03u/EVSDfKTtUwR079rrRdq/7VTj3ZVAGy2a/xx7XYAoN8wct/RmDB86vytV5\nj3Gz4PZ9DVHyGGFeVwnlK6jmO1g9ZqjOBNnpZb890iP6ciAYaHWV9C49O9ao01YI\nolX/V5CIl0qQJxYyITMls4o3Kym5Qhy82H/hOEDBAoGBAIXvNgH+wyj40LpvvZ1a\nFJPghogMqyrh2lX4/CXiGRZh1wWILJeI4MI2W5zfU28x3F2picGNnpZfs1E1wgDk\nFjPt/lm61ngDVGwRhbGk8Br92spYyNw+Jv5k972BFr2GgYnUFx1x0jWLIHGEq2nU\ngy6wJWzSqpKz4E4YLbQcokxA\n-----END PRIVATE KEY-----\n",
+  "client_email": "storagebucket@cogent-spring-386518.iam.gserviceaccount.com",
+  "client_id": "108869226945184015926",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/storagebucket%40cogent-spring-386518.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
