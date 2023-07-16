@@ -19,6 +19,8 @@ export default function Home() {
   const [isLoading, setLoading] = useState(false);
   const [isOpen, toggleOpen] = useToggle();
 
+  console.log({ cronjobDate });
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {

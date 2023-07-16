@@ -8,7 +8,8 @@ export async function POST(request = Request.prototype) {
   const timeStamp = new Timestamp(data);
   const result = await timeStamp.save();
   const today = new Date(cronjobDate);
-  today.setMinutes(today.getMinutes() + 1);
+  today.setMinutes(today.getMinutes());
+  today.setSeconds(0);
 
   console.log(`\nSetting cronjob at ${today}`);
 
