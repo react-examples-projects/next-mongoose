@@ -17,3 +17,5 @@ export const getTimestamps = () => fetcher.get();
 export const createTimestamp = (data) => fetcher.post("", data);
 
 export const editTimestamp = (id, data) => fetcher.put(`/${id}`, data);
+
+export const deleteTimestamp = (id) => fetcher.delete(`/${id}`);

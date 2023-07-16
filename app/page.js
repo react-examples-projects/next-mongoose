@@ -1,5 +1,5 @@
 "use client";
-import { Container, Button, Box, Modal } from "@mantine/core";
+import { Container, Button, Box, Modal, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import { DateInput } from "@mantine/dates";
@@ -46,43 +46,44 @@ export default function Home() {
 
   return (
     <>
-      <Modal
-        opened={isOpen}
-        onClose={toggleOpen}
-        title="Create timestamp"
-        centered
-      >
-        <Box onSubmit={onSubmit} autoComplete="off" component="form" maw={500}>
-          <DateInput
-            value={initDate}
-            onChange={setInitDate}
-            label="Fecha de inicio"
-            placeholder="Selecciona una fecha de inicio"
-            mb="2rem"
-            disabled={isLoading}
-          />
-
-          <DateInput
-            value={endDate}
-            onChange={setEndDate}
-            label="Fecha fin"
-            placeholder="Selecciona una fecha de finalización"
-            disabled={isLoading}
-          />
-
-          <Button
-            type="submit"
-            mt="1rem"
-            loading={isLoading}
-            disabled={isLoading}
-            fullWidth
-          >
-            Aceptar
-          </Button>
-        </Box>
-      </Modal>
-
       <Container mt="8rem">
+        {isOpen && (
+          <Box
+            onSubmit={onSubmit}
+            autoComplete="off"
+            component="form"
+            maw={500}
+            mb={8}
+          >
+            <Title order={3}>Create Timesamp</Title>
+            <DateInput
+              value={initDate}
+              onChange={setInitDate}
+              label="Fecha de inicio"
+              placeholder="Selecciona una fecha de inicio"
+              mb="2rem"
+              disabled={isLoading}
+            />
+
+            <DateInput
+              value={endDate}
+              onChange={setEndDate}
+              label="Fecha fin"
+              placeholder="Selecciona una fecha de finalización"
+              disabled={isLoading}
+            />
+
+            <Button
+              type="submit"
+              mt="1rem"
+              loading={isLoading}
+              disabled={isLoading}
+              fullWidth
+            >
+              Aceptar
+            </Button>
+          </Box>
+        )}
         <TimestampList
           mt="2rem"
           createButton={<Button onClick={toggleOpen}>Create timestamp</Button>}

@@ -3,13 +3,33 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import useToggle from "@/hooks/useToggle";
 import useEditTimestamp from "@/hooks/useEditTimestamp";
 import { notifications } from "@mantine/notifications";
-import { Card, Text, Button, Flex, Modal, Code, Divider } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Button,
+  Flex,
+  Modal,
+  Code,
+  Divider,
+  Badge,
+} from "@mantine/core";
 import { FiTrash, FiEdit3 } from "react-icons/fi";
 import { DateInput } from "@mantine/dates";
+import Countdown from "./CountDown";
+import useDeleteTimestamp from "@/hooks/useDeleteTimestamp";
 dayjs.extend(relativeTime);
 
-export default function TimestampItem({ _id, initDate, endDate, created_at }) {
+export default function TimestampItem({
+  _id,
+  validated,
+  initDate,
+  endDate,
+  created_at,
+}) {
   const { trigger, isMutating } = useEditTimestamp();
+  const { trigger: deleteTimestamp, isMutating: isDeletingTimestamp } =
+    useDeleteTimestamp();
+
   const [isEditable, toggleEditable] = useToggle();
   const initDateF = dayjs(initDate).format("DD-MM-YYYY");
   const endDateF = dayjs(endDate).format("DD-MM-YYYY");
@@ -36,13 +56,29 @@ export default function TimestampItem({ _id, initDate, endDate, created_at }) {
   return (
     <>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Text>ID ${_id}</Text>
-
-        <Code mt="1rem" mb="0.5rem" sx={{ display: "block" }}>
-          Initial date {initDateF}
+        <Code
+          mb="0.5rem"
+          display="flex"
+          py={5}
+          sx={{ alignItems: "center", justifyContent: "space-between" }}
+        >
+          <Text c="dimmed" fw={700} fz="xs">
+            {_id}
+          </Text>
+          <Badge color={validated ? "green" : "red"}>
+            {validated ? "Validated" : "No validated"}
+          </Badge>
         </Code>
 
-        <Code sx={{ display: "block" }}>End date {endDateF}</Code>
+        <Text fz="sm" fw={700}>
+          Initial date
+        </Text>
+        <Text mb={10}>{initDateF}</Text>
+
+        <Text fz="sm" fw={700}>
+          End date
+        </Text>
+        <Text>{endDateF}</Text>
 
         <Divider mt="0.5rem" />
 
@@ -50,13 +86,20 @@ export default function TimestampItem({ _id, initDate, endDate, created_at }) {
           Create at {created}
         </Text>
 
+        <Countdown date={new Date(endDate)} />
+
         <Flex gap="5px" mt="1rem">
           <Button size="xs" variant="light" onClick={toggleEditable}>
             <Text mr="10px">{isEditable ? "Editing..." : "Edit"}</Text>
             <FiEdit3 />
           </Button>
 
-          <Button size="xs" variant="light" color="red">
+          <Button
+            size="xs"
+            variant="light"
+            color="red"
+            onClick={() => deleteTimestamp(_id)}
+          >
             <Text mr="10px">Delete</Text> <FiTrash />
           </Button>
         </Flex>

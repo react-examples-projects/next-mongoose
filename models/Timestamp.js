@@ -2,6 +2,10 @@ import { Schema, model, models } from "mongoose";
 
 const timestamp = new Schema(
   {
+    validated: {
+      type: Boolean,
+      default: false,
+    },
     initDate: {
       type: Date,
       required: true,
