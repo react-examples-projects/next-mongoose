@@ -4,10 +4,10 @@ import sheduler from "node-schedule";
 
 export async function POST(request = Request.prototype) {
   await connectMongo();
-  const data = await request.json();
+  const { cronjobDate, ...data } = await request.json();
   const timeStamp = new Timestamp(data);
   const result = await timeStamp.save();
-  const today = new Date();
+  const today = new Date(cronjobDate);
   today.setMinutes(today.getMinutes() + 1);
 
   console.log(`\nSetting cronjob at ${today}`);
