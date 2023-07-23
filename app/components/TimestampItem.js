@@ -12,6 +12,7 @@ import {
   Code,
   Divider,
   Badge,
+  Box,
 } from "@mantine/core";
 import { FiTrash, FiEdit3 } from "react-icons/fi";
 import { DateInput } from "@mantine/dates";
@@ -70,25 +71,43 @@ export default function TimestampItem({
           </Badge>
         </Code>
 
-        <Text fz="sm" fw={700}>
-          Initial date
-        </Text>
-        <Text mb={10}>{initDateF}</Text>
+        <Flex align="center" gap={5}>
+          <Card
+            shadow="sm"
+            padding="md"
+            radius="md"
+            style={{ flex: 1 }}
+            withBorder
+          >
+            <Text fz="sm" fw={700}>
+              Initial date
+            </Text>
+            <Text>{initDateF}</Text>
+          </Card>
 
-        <Text fz="sm" fw={700}>
-          End date
-        </Text>
-        <Text>{endDateF}</Text>
+          <Card
+            shadow="sm"
+            padding="md"
+            radius="md"
+            style={{ flex: 1 }}
+            withBorder
+          >
+            <Text fz="sm" fw={700}>
+              End date
+            </Text>
+            <Text>{endDateF}</Text>
+          </Card>
+        </Flex>
 
-        <Divider mt="0.5rem" />
+        <Card shadow="sm" padding="md" radius="md" mt={5} withBorder>
+          <Text size="sm" color="dimmed" mt="0.5rem">
+            Create at {created}
+          </Text>
 
-        <Text size="sm" color="dimmed" mt="0.5rem">
-          Create at {created}
-        </Text>
+          <Countdown date={new Date(endDate)} />
+        </Card>
 
-        <Countdown date={new Date(endDate)} />
-
-        <Flex gap="5px" mt="1rem">
+        <Flex gap="4px" mt="0.5rem">
           <Button size="xs" variant="light" onClick={toggleEditable}>
             <Text mr="10px">{isEditable ? "Editing..." : "Edit"}</Text>
             <FiEdit3 />

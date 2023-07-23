@@ -4,12 +4,15 @@ import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import { useSWRConfig } from "swr";
-import dayjs from "dayjs";
-import TimestampList from "./components/TimestampList";
 import { createTimestamp } from "@/helpers/api";
 import useToggle from "@/hooks/useToggle";
-
+import dayjs from "dayjs";
+import dynamic from "next/dynamic";
+import TimestampList from "./components/TimestampList";
 const today = new Date();
+const File = dynamic(() => import("./components/File"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function Home() {
   const { mutate } = useSWRConfig();
@@ -89,6 +92,7 @@ export default function Home() {
             </Button>
           </Box>
         )}
+        <File />
         <TimestampList
           mt="2rem"
           createButton={
