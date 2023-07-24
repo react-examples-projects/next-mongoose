@@ -1,10 +1,11 @@
 "use client";
 import { Inter } from "next/font/google";
-import RootStyleRegistry from "./emotion";
 import { SWRConfig } from "swr";
 import {  MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import "atropos/css";
 import "./globals.css";
+import RootStyleRegistry from "./emotion";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,7 +14,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
+  return ( 
     <html lang="en-US">
       <head />
       <body className={inter.className}>
