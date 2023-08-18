@@ -14,6 +14,10 @@ const timestamp = new Schema(
       type: Date,
       required: true,
     },
+    order: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     collection: "timestamps",

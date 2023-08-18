@@ -5,7 +5,16 @@ import sheduler from "node-schedule";
 export async function POST(request = Request.prototype) {
   await connectMongo();
   const { cronjobDate, ...data } = await request.json();
-  const timeStamp = new Timestamp(data);
+  const lastTimestamp = await Timestamp.find({})
+    .select("order")
+    .sort({ order: -1 })
+    .limit(1);
+
+  const timeStamp = new Timestamp({
+    ...data,
+    order: lastTimestamp[0].order + 1,
+  });
+  
   const result = await timeStamp.save();
   const today = new Date(cronjobDate);
   today.setMinutes(today.getMinutes());
