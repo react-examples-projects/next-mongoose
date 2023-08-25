@@ -44,6 +44,7 @@ export default async function connectMongo() {
     console.warn(chalk.yellowBright("Disconnected from MongoDB"));
   }
   try {
+    console.log(MONGO_URI);
     const con = await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
