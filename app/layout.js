@@ -1,28 +1,29 @@
 "use client";
 import { Inter } from "next/font/google";
 import { SWRConfig } from "swr";
-import {  MantineProvider } from "@mantine/core";
+import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import "atropos/css";
-import "./globals.css";
-import RootStyleRegistry from "./emotion";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
-  return ( 
+  return (
     <html lang="en-US">
-      <head />
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={inter.className}>
-        <RootStyleRegistry>
-          <MantineProvider
-            theme={{ colorScheme: "dark" }}
-            withGlobalStyles
-            withNormalizeCSS
-          >
-            <Notifications />
-            <SWRConfig>{children}</SWRConfig>
-          </MantineProvider>
-        </RootStyleRegistry>
+        <MantineProvider
+          defaultColorScheme="dark"
+          withGlobalStyles
+          withNormalizeCSS
+        >
+          <Notifications />
+          <SWRConfig>{children}</SWRConfig>
+        </MantineProvider>
       </body>
     </html>
   );

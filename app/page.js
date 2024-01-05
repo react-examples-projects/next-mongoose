@@ -1,5 +1,5 @@
 "use client";
-import { Container, Button, Box, Title } from "@mantine/core";
+import { Container, Button, Box, Title, Modal } from "@mantine/core";
 import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
 import { useState, useEffect } from "react";
@@ -7,12 +7,12 @@ import { useSWRConfig } from "swr";
 import { createTimestamp } from "@/helpers/api";
 import useToggle from "@/hooks/useToggle";
 import dayjs from "dayjs";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import TimestampList from "./components/TimestampList";
 const today = new Date();
-const File = dynamic(() => import("./components/File"), {
-  loading: () => <p>Loading...</p>,
-});
+// const File = dynamic(() => import("./components/File"), {
+//   loading: () => <p>Loading...</p>,
+// });
 
 export default function Home() {
   const { mutate } = useSWRConfig();
@@ -20,8 +20,7 @@ export default function Home() {
   const [cronjobDate, setCronjobDate] = useState(today);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
-  const [isOpen, toggleOpen] = useToggle();
-
+  const [isOpenModal, toggleOpenModal] = useToggle();
   console.log({ cronjobDate });
 
   const onSubmit = async (e) => {
@@ -37,7 +36,7 @@ export default function Home() {
       });
 
       await mutate("timestamps");
-      toggleOpen();
+      toggleOpenModal();
 
       notifications.show({
         title: "Timestamp created successfully",
@@ -54,7 +53,12 @@ export default function Home() {
   return (
     <>
       <Container mt="8rem">
-        {isOpen && (
+        <Modal
+          opened={isOpenModal}
+          onClose={toggleOpenModal}
+          title="Create Timesamp"
+          centered
+        >
           <Box
             onSubmit={onSubmit}
             autoComplete="off"
@@ -62,8 +66,6 @@ export default function Home() {
             maw={500}
             mb={8}
           >
-            <Title order={3}>Create Timesamp</Title>
-
             <DatePickerInput
               type="range"
               label="Pick dates range"
@@ -83,7 +85,7 @@ export default function Home() {
 
             <Button
               type="submit"
-              mt="0.5rem"
+              mt="2rem"
               loading={isLoading}
               disabled={isLoading}
               fullWidth
@@ -91,12 +93,13 @@ export default function Home() {
               Aceptar
             </Button>
           </Box>
-        )}
-        <File />
+        </Modal>
+
+        {/* <File /> */}
         <TimestampList
           mt="2rem"
           createButton={
-            <Button onClick={toggleOpen} mt={10}>
+            <Button onClick={toggleOpenModal} mt={10}>
               Create timestamp
             </Button>
           }

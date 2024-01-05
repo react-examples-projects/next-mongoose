@@ -39,6 +39,7 @@ export default function TimestampItem({
   const formatted = dayjs(created_at).toISOString();
   const created = dayjs(formatted).fromNow();
   const elRef = useRef(null);
+
   useEffect(() => {
     const myAtropos = Atropos({
       el: elRef.current,
@@ -68,24 +69,30 @@ export default function TimestampItem({
   };
 
   return (
-    <div class="atropos my-atropos" ref={elRef}>
-      <div class="atropos-scale">
-        <div class="atropos-rotate">
-          <div class="atropos-inner">
+    <div
+      className="atropos my-atropos"
+      ref={elRef}
+      style={{ cursor: "move" }}
+    >
+      <div className="atropos-scale">
+        <div className="atropos-rotate">
+          <div className="atropos-inner">
             <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Code
-                mb="0.5rem"
-                display="flex"
-                py={5}
-                sx={{ alignItems: "center", justifyContent: "space-between" }}
-              >
-                <Text c="dimmed" fw={700} fz="xs">
-                  {_id}
-                </Text>
+              <Flex align="center" justify="space-between" mb="0.5rem">
+                <Code
+                  display="flex"
+                  py={5}
+                  sx={{ alignItems: "center", justifyContent: "space-between" }}
+                >
+                  <Text c="dimmed" fw={700} fz="xs">
+                    {_id}
+                  </Text>
+                </Code>
+
                 <Badge color={validated ? "green" : "red"}>
                   {validated ? "Validated" : "No validated"}
                 </Badge>
-              </Code>
+              </Flex>
 
               <Flex align="center" gap={5}>
                 <Card

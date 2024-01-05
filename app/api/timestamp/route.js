@@ -45,8 +45,8 @@ export async function POST(request = Request.prototype) {
 
 export async function GET(request = Request.prototype) {
   await connectMongo();
-  const timeStamps = await Timestamp.find({}).lean();
-
+  const timeStamps = await Timestamp.find({}).sort({ order: 1 }).lean();
+  console.log(timeStamps);
   return new Response(JSON.stringify({ data: timeStamps }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
