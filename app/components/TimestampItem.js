@@ -9,6 +9,7 @@ import {
   Badge,
   Box,
 } from "@mantine/core";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { FiTrash, FiEdit3 } from "react-icons/fi";
 import { DateInput } from "@mantine/dates";
 import { useEffect, useRef } from "react";
@@ -28,6 +29,7 @@ export default function TimestampItem({
   endDate,
   created_at,
 }) {
+  const { data: session } = useSession();
   const { trigger, isMutating } = useEditTimestamp();
   const { trigger: deleteTimestamp, isMutating: isDeletingTimestamp } =
     useDeleteTimestamp();
@@ -43,10 +45,10 @@ export default function TimestampItem({
   useEffect(() => {
     const myAtropos = Atropos({
       el: elRef.current,
-      rotateXMax: 5,
-      rotateYMax: 5,
+      rotateXMax: 3,
+      rotateYMax: 3,
       shadow: false,
-      activeOffset: 30,
+      activeOffset: 0,
       // rest of parameters
     });
     return () => myAtropos.destroy();
@@ -69,11 +71,7 @@ export default function TimestampItem({
   };
 
   return (
-    <div
-      className="atropos my-atropos"
-      ref={elRef}
-      style={{ cursor: "move" }}
-    >
+    <div className="atropos my-atropos" ref={elRef} style={{ cursor: "move" }}>
       <div className="atropos-scale">
         <div className="atropos-rotate">
           <div className="atropos-inner">
@@ -131,19 +129,25 @@ export default function TimestampItem({
               </Card>
 
               <Flex gap="4px" mt="0.5rem">
-                <Button size="xs" variant="light" onClick={toggleEditable}>
-                  <Text mr="10px">{isEditable ? "Editing..." : "Edit"}</Text>
-                  <FiEdit3 />
-                </Button>
-
-                <Button
-                  size="xs"
-                  variant="light"
-                  color="red"
-                  onClick={() => deleteTimestamp(_id)}
-                >
-                  <Text mr="10px">Delete</Text> <FiTrash />
-                </Button>
+                {session && (
+                  <>
+                    <Button size="xs" variant="light" onClick={toggleEditable}>
+                      <Text mr="10px">
+                        {isEditable ? "Editing..." : "Edit"}
+                      </Text>
+                      <FiEdit3 />
+                    </Button>
+                    
+                    <Button
+                      size="xs"
+                      variant="light"
+                      color="red"
+                      onClick={() => deleteTimestamp(_id)}
+                    >
+                      <Text mr="10px">Delete</Text> <FiTrash />
+                    </Button>
+                  </>
+                )}
               </Flex>
             </Card>
 

@@ -1,8 +1,9 @@
 "use client";
-import { Container, Button, Box, Title, Modal } from "@mantine/core";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Container, Button, Box, Modal, Avatar, Flex } from "@mantine/core";
 import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSWRConfig } from "swr";
 import { createTimestamp } from "@/helpers/api";
 import useToggle from "@/hooks/useToggle";
@@ -15,6 +16,8 @@ const today = new Date();
 // });
 
 export default function Home() {
+  const { data: session } = useSession();
+
   const { mutate } = useSWRConfig();
   const [dates, setDates] = useState([today]);
   const [cronjobDate, setCronjobDate] = useState(today);
@@ -96,6 +99,26 @@ export default function Home() {
         </Modal>
 
         {/* <File /> */}
+        {session ? (
+          <Box mb={10}>
+            <Flex align="center">
+              <Avatar src={session.user.image} alt="it's me" mr={10} />
+              <p>{session.user.name}</p>
+            </Flex>
+            <Button
+              onClick={() => signOut()}
+              variant="light"
+              color="red"
+              size="xs"
+            >
+              Sign Out
+            </Button>
+          </Box>
+        ) : (
+          <Button onClick={() => signIn()} display="block">
+            Sign In
+          </Button>
+        )}
         <TimestampList
           mt="2rem"
           createButton={

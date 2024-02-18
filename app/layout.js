@@ -3,10 +3,13 @@ import { Inter } from "next/font/google";
 import { SWRConfig } from "swr";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { SessionProvider } from "next-auth/react";
+import "@fontsource/inter";
 import "atropos/css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-
+import "@mantine/notifications/styles.css";
+import "./style/global.css"
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
@@ -22,7 +25,9 @@ export default function RootLayout({ children }) {
           withNormalizeCSS
         >
           <Notifications />
-          <SWRConfig>{children}</SWRConfig>
+          <SWRConfig>
+            <SessionProvider>{children}</SessionProvider>
+          </SWRConfig>
         </MantineProvider>
       </body>
     </html>
