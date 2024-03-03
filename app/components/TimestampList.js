@@ -43,7 +43,7 @@ export default function TimestampList({ createButton, ...props }) {
   return (
     <>
       {createButton}
-      <Box mt={10}>
+      <Box mt={10} mb={90} {...props}>
         <ReactSortable
           list={timestamps}
           setList={(newlist) => setTimestamps(newlist)}

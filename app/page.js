@@ -1,6 +1,6 @@
 "use client";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Container, Button, Box, Modal, Avatar, Flex } from "@mantine/core";
+import { Container, Button, Box, Modal, Avatar, Flex, HoverCard, Group } from "@mantine/core";
 import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
@@ -16,7 +16,7 @@ const today = new Date();
 // });
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const { mutate } = useSWRConfig();
   const [dates, setDates] = useState([today]);
@@ -56,19 +56,8 @@ export default function Home() {
   return (
     <>
       <Container mt="8rem">
-        <Modal
-          opened={isOpenModal}
-          onClose={toggleOpenModal}
-          title="Create Timesamp"
-          centered
-        >
-          <Box
-            onSubmit={onSubmit}
-            autoComplete="off"
-            component="form"
-            maw={500}
-            mb={8}
-          >
+        <Modal opened={isOpenModal} onClose={toggleOpenModal} title="Create Timesamp" centered>
+          <Box onSubmit={onSubmit} autoComplete="off" component="form" maw={500} mb={8}>
             <DatePickerInput
               type="range"
               label="Pick dates range"
@@ -86,41 +75,38 @@ export default function Home() {
               value={cronjobDate}
             />
 
-            <Button
-              type="submit"
-              mt="2rem"
-              loading={isLoading}
-              disabled={isLoading}
-              fullWidth
-            >
+            <Button type="submit" mt="2rem" loading={isLoading} disabled={isLoading} fullWidth>
               Aceptar
             </Button>
           </Box>
         </Modal>
 
         {/* <File /> */}
-        {session ? (
-          <Box mb={10}>
-            <Flex align="center">
-              <Avatar src={session.user.image} alt="it's me" mr={10} />
-              <p>{session.user.name}</p>
-            </Flex>
-            <Button
-              onClick={() => signOut()}
-              variant="light"
-              color="red"
-              size="xs"
-            >
-              Sign Out
+
+        {status !== "loading" &&
+          (session ? (
+            <Group>
+              <HoverCard shadow="md">
+                <HoverCard.Target>
+                  <Flex align="center">
+                    <Avatar src={session.user.image} alt="it's me" mr={10} />
+                    <p>{session.user.name}</p>
+                  </Flex>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                  <Button variant="default" onClick={() => signOut()}>
+                    Sign Out{" "}
+                  </Button>
+                </HoverCard.Dropdown>
+              </HoverCard>
+            </Group>
+          ) : (
+            <Button onClick={() => signIn()} display="block">
+              Sign In
             </Button>
-          </Box>
-        ) : (
-          <Button onClick={() => signIn()} display="block">
-            Sign In
-          </Button>
-        )}
+          ))}
+
         <TimestampList
-          mt="2rem"
           createButton={
             <Button onClick={toggleOpenModal} mt={10}>
               Create timestamp

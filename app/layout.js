@@ -1,5 +1,6 @@
 "use client";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
+import cls from "classnames";
 import { SWRConfig } from "swr";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
@@ -9,8 +10,9 @@ import "atropos/css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
-import "./style/global.css"
+import "./style/global.css";
 const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
@@ -18,12 +20,8 @@ export default function RootLayout({ children }) {
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={inter.className}>
-        <MantineProvider
-          defaultColorScheme="dark"
-          withGlobalStyles
-          withNormalizeCSS
-        >
+      <body className={cls(inter.className, outfit.className)}>
+        <MantineProvider defaultColorScheme="dark" withGlobalStyles withNormalizeCSS>
           <Notifications />
           <SWRConfig>
             <SessionProvider>{children}</SessionProvider>
