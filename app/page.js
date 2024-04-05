@@ -3,9 +3,10 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Container, Button, Box, Modal, Avatar, Flex, HoverCard, Group } from "@mantine/core";
 import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSWRConfig } from "swr";
 import { createTimestamp } from "@/helpers/api";
+import Link from "next/link";
 import useToggle from "@/hooks/useToggle";
 import dayjs from "dayjs";
 // import dynamic from "next/dynamic";
@@ -53,9 +54,21 @@ export default function Home() {
     }
   };
 
+  // useEffect(() => {
+  //   window.Notification.requestPermission().then(function (result) {
+  //     var img = "/like.png";
+  //     var text = 'Se ha completado una tarea';
+  //     var notification = new Notification("Lista de tareas", {
+  //       body: text,
+  //       icon: img,
+  //     });
+  //   });
+  // }, []);
+
   return (
     <>
       <Container mt="8rem">
+        <Link href="/pricing">Go to pricing</Link>
         <Modal opened={isOpenModal} onClose={toggleOpenModal} title="Create Timesamp" centered>
           <Box onSubmit={onSubmit} autoComplete="off" component="form" maw={500} mb={8}>
             <DatePickerInput

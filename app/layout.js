@@ -1,6 +1,8 @@
 "use client";
 import { Inter, Outfit } from "next/font/google";
 import cls from "classnames";
+import NProgress from "nprogress";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { SWRConfig } from "swr";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
@@ -11,10 +13,31 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "./style/global.css";
+import "nprogress/nprogress.css";
+import "./style/nprogress.scss";
+
 const inter = Inter({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if(!router.events) return
+  //   const handleRouteStart = () => NProgress.start();
+  //   const handleRouteDone = () => NProgress.done();
+
+  //   router.events.on("routeChangeStart", handleRouteStart);
+  //   router.events.on("routeChangeComplete", handleRouteDone);
+  //   router.events.on("routeChangeError", handleRouteDone);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleRouteStart);
+  //     router.events.off("routeChangeComplete", handleRouteDone);
+  //     router.events.off("routeChangeError", handleRouteDone);
+  //   };
+  // }, [router.events]);
+
   return (
     <html lang="en-US">
       <head>
@@ -57,6 +80,11 @@ export default function RootLayout({ children }) {
             <SessionProvider>{children}</SessionProvider>
           </SWRConfig>
         </MantineProvider>
+        <ProgressBar
+          height="2px"
+          color="#ff1fa5"
+          options={{ showSpinner: true }}
+        />
       </body>
     </html>
   );
